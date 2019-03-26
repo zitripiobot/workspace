@@ -1,0 +1,333 @@
+Understanding Variables
+
+Declaring a String Variable
+---------------------------
+package main
+import (
+	"fmt"
+)
+func main() {
+	var s string = "Hello World"
+	fmt.Println(s)
+}
+
+Assigning a Value after Initializing a Variable
+-----------------------------------------------
+package main
+
+import (
+   "fmt"
+)
+
+func main() {
+
+var s string
+s = "Hello World"
+fmt.Println(s)
+}
+
+Assigning an Incorrect Type to a Variable
+-----------------------------------------
+package main
+import (
+"fmt"
+)
+func main() {
+var i int
+i = "One"
+fmt.Println(i)
+}
+
+go run example03.go
+# command-line-arguments
+./example03.go:7: cannot use "One" (type string) as type int in assignment
+
+DECLARING SHORTHAND VARIABLES
+=============================
+
+Shorthand Variable Declaration
+------------------------------
+package main
+
+import (
+   "fmt"
+)
+
+func main() {
+	var s, t string = "foo", "bar"
+	fmt.Println(s)
+	fmt.Println(t)
+}
+
+
+Shorthand Variable Declaration for Different Types
+--------------------------------------------------
+
+package main
+
+import (
+   "fmt"
+)
+
+func main() {
+var (
+	s string = "foo"
+	i int = 4
+)
+
+fmt.Println(s)
+fmt.Println(i)
+
+
+OJO: No esta permitido declarar una misma variable despues de otra.
+var s int = 1
+fmt.Println(s)
+
+// This is not permitted
+var s string = "Hello World"
+
+
+UNDERSTANDING VARIABLES AND ZERO VALUES
+=======================================
+
+Variable Zero Values
+--------------------
+
+package main
+
+import (
+	"fmt"
+)
+
+func main(){
+	var i int
+	var f float
+	var b bool
+	var s string
+
+	fmt.Printf("%v %v %v %q\n",i,f,b,s)
+}
+
+go run example06.go
+0 0 false ""
+
+
+Checking for Zero-Valued Variables
+----------------------------------
+
+
+package main
+
+import (
+	"fmt"
+)
+
+
+func main(){
+	
+	var s string
+
+	if s == ""{
+		fmt.Printf("s has not been assigned a value and is zero valued");
+	}
+}
+
+
+WRITING A SHORT VARIABLE DECLARATION
+=====================================
+
+Declaring a Variable in Short Variable Form
+-------------------------------------------
+
+package main
+
+import (
+"fmt"
+)
+
+func main(){
+	
+	s := "hello world"
+	fmt.Println(s)
+}
+
+
+STYLES OF VARIABLE DECLARATION
+==============================
+
+
+var s string = "hello world"
+vas s = "hello world"
+var t string
+t = "hello"
+u := "hello"
+
+Idiomatic Variable Declaration
+------------------------------
+
+1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  var s = "Hello World"
+ 6
+ 7:  func main() {
+ 8:      i := 42
+ 9:      fmt.Println(s)
+10:      fmt.Println(i)
+11:  }
+
+go run example09.go
+Hello World
+42
+
+
+USING VARIABLE SCOPE
+====================
+
+Lexical Scoping in Go
+----------------------
+
+1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  var s = "Hello world"
+ 8:
+ 9:  func main() {
+10:      fmt.Printf("Print 's' variable from outer block %v\n", s)
+11:      b := true
+12:      if b {
+13:          fmt.Printf("Printing 'b' variable from outer block %v\n", b)
+14:          i := 42
+15:          if b != false {
+16:              fmt.Printf("Printing 'i' variable from outer block %v\n", i)
+17:          }
+18:      }
+19:  }
+
+go run example10.go
+Printing 's' variable from outer block Hello world
+Printing 'b' variable from outer block true
+Printing 'i' variable from outer block 42
+
+
+USING POINTERS
+==============
+
+Assigning a Value after Initializing a Variable
+-----------------------------------------------
+
+ 1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  func main() {
+ 8:      s := "Hello World"
+ 9:      fmt.Println(&s)
+10:  }
+
+go run example11.go
+0xc42000e230
+
+Passing Variables as Values
+---------------------------
+
+ 1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  func showMemoryAddress(x int) {
+ 8:      fmt.Println(&x)
+ 9:      return
+10:  }
+11:
+12:  func main() {
+13:      i := 1
+14:      fmt.Println(&i)
+14:      showMemoryAddress(i)
+15:  }
+
+
+go run example12.go
+0xc42000a2e8
+0xc42000a320
+
+Passing Variables as Pointers
+----------------------------
+
+ 1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  func showMemoryAddress(x *int) {
+ 8:      fmt.Println(x)
+ 9:      return
+10:  }
+11:
+12:  func main() {
+13:      i := 1
+14:      fmt.Println(&i)
+14:      showMemoryAddress(&i)
+15:  }
+
+go run example13.go
+0xc42000a2e8
+0xc42000a2e8
+
+
+func showMemoryAddress(x *int) {
+
+    fmt.Println(*x)
+
+    return
+}
+
+
+DECLARING VARIABLES WITH CONSTANTS
+==================================
+
+Declaring a Constant
+--------------------
+
+ 1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  const greeting string = "Hello, world"
+ 8:
+ 9:  func main() {
+10:      fmt.Println(greeting)
+11:  }
+
+Attempting to Change a Constant
+-------------------------------
+ 1:  package main
+ 2:
+ 3:  import (
+ 4:      "fmt"
+ 5:  )
+ 6:
+ 7:  const greeting string = "Hello, world"
+ 8:
+ 9:  func main() {
+10:      greeting = "Goodbye, cruel world"
+11:      fmt.Println(greeting)
+12:  }
+
+go run example15.go
+# command-line-arguments
+./example15.go:10: cannot assign to greeting
+
